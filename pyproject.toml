@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "understudy-mcp"
+dynamic = ["version"]
+description = "An MCP server that lets Claude Code hand routine coding tasks to a local model, gated by your tests"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "Barry Lenhart" }]
+keywords = ["mcp", "claude-code", "ollama", "local-llm", "agents", "code-generation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development",
+]
+dependencies = ["mcp>=2.2,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+understudy-mcp = "understudy.server:main"
+
+[project.urls]
+Homepage = "https://github.com/Barry-Lenhart/understudy"
+Issues = "https://github.com/Barry-Lenhart/understudy/issues"
+
+[tool.hatch.version]
+path = "src/understudy/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/understudy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
